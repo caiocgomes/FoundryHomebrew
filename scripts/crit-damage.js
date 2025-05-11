@@ -14,7 +14,7 @@ Hooks.once("ready", () => {
       const damageRoll = await wrapped(...args);
   
       // Só modifica se for dano crítico
-      if (!config.critical) {
+      if (!config.options.critical) {
         console.log("config: ",config)
         console.log("Dano normal: ",damageRoll)
         return damageRoll;
