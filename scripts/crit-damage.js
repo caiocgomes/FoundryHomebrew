@@ -8,18 +8,22 @@ Hooks.once("ready", () => {
   
     libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollDamage", async function (wrapped, ...args) {
       
-      console.log("Interceptando jogada critica (dano)",this)
       const [config = {}, options = {}] = args;
         
       // Chama a função original para obter o resultado base
       const damageRoll = await wrapped(...args);
   
       // Só modifica se for dano crítico
-      if (!config.critical) return damageRoll;
+      if (!config.critical) {
+        console.log("Dano normal: ",damageRoll)
+        return damageRoll;
+      }
+      console.log("Interceptando jogada critica (dano)",this)
   
       // Pega a fórmula original da rolagem
       const originalFormula = damageRoll._formula;
-  
+      console.log("Formula dano: ",originalFormula)
+
       // Usa RegEx para encontrar os dados (ex: 2d6, 1d8)
       const diceRegex = /(\d+)d(\d+)/g;
       let maxDiceTotal = 0;
