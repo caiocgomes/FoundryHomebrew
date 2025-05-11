@@ -7,41 +7,42 @@ Hooks.once("ready", () => {
   }
 
   libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollAttack", async function (wrapped, ...args) {
-    console.log("Interceptando ataque", this)
-    const attackRoll = await new Roll("1d20 + @attributes.prof").roll({async: true});
+    console.log("Interceptando ataque", this);
+
+    // Sempre execute a rolagem original primeiro
+    const attackRoll = await wrapped(...args);
+
     const attacker = this;
     const targets = Array.from(game.user.targets);
     if (targets.length === 0) {
       ui.notifications.warn("Nenhum alvo selecionado para o ataque!");
-      return attackRoll;
+      return attackRoll;  // Está tudo certo, pois o wrapped foi chamado
     }
 
-    const target = targets[0]; // Pega o primeiro token alvo
+    const target = targets[0];
     const targetActor = target.actor;
 
-
-    // Envia uma mensagem no chat para que o alvo role sua defesa
     const message = await ChatMessage.create({
       user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: targetActor }),
       content: `<button class="defense-roll">Rolar Defesa</button>`,
     });
-    // Escuta clique no botão
+
     Hooks.once("renderChatMessage", (msg, html, data) => {
       html.find(".defense-roll").click(async () => {
         const defenseBonus = targetActor.system.attributes.ac.value - 10;
-        const defenseRoll = await new Roll("1d20 + ${defenseBonus}", targetActor.getRollData()).roll({ async: true });
+        const formula = `1d20 + ${defenseBonus}`;
+        const defenseRoll = await new Roll(formula).roll({ async: true });
         defenseRoll.toMessage({
           speaker: ChatMessage.getSpeaker({ actor: targetActor }),
           flavor: "Defesa Ativa",
         });
 
-        // Aqui você pode comparar defesaRoll.total com attackRoll.total
-        // e decidir se o ataque acerta ou não
+        // Aqui você pode comparar os valores
+        console.log(`Ataque: ${attackRoll.total} vs Defesa: ${defenseRoll.total}`);
       });
     });
 
     return attackRoll;
   }, "WRAPPER");
 });
-
