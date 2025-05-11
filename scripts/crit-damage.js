@@ -6,47 +6,41 @@ Hooks.once("ready", () => {
       return;
     }
   
-    libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollDamage", async function (wrapped, ...args) {
+    libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollDamage", async function (...args) {
+        const [config = {}, options = {}] = args;
       
-      const [config = {}, options = {}] = args;
+        // Garante que ainda é executado como dano crítico
         
-      // Chama a função original para obter o resultado base
-      const damageRoll = await wrapped(...args);
       
-      console.log("config: ",damageRoll)
-      // Só modifica se for dano crítico
-      if (!damageRoll.isCritical) {
-        
-        console.log("Dano normal: ",damageRoll)
-        return damageRoll;
-      }
-      console.log("Interceptando jogada critica (dano)",this)
-  
-      // Pega a fórmula original da rolagem
-      const originalFormula = damageRoll._formula;
-      console.log("Formula dano: ",originalFormula)
-
-      // Usa RegEx para encontrar os dados (ex: 2d6, 1d8)
-      const diceRegex = /(\d+)d(\d+)/g;
-      let maxDiceTotal = 0;
-      let match;
-      while ((match = diceRegex.exec(originalFormula)) !== null) {
-        const [_, qtd, faces] = match;
-        maxDiceTotal += parseInt(qtd) * parseInt(faces);
-      }
-  
-      // Valor total final: rolagem + máximo dos dados
-      const newTotal = damageRoll.total + maxDiceTotal;
-      console.log("Dano total: ",newTotal)
-      // Atualiza o flavor e mostra o novo valor no chat
-      damageRoll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `💥 Dano Crítico (Máximo dos Dados + Rolagem + Bônus): ${damageRoll.total} + ${maxDiceTotal} = ${newTotal}`,
-      });
-  
-      // Sobrescreve o total (nota: isso afeta só a exibição, não refaz o Roll internamente)
-      damageRoll._total = newTotal;
-      return damageRoll;
-    }, "WRAPPER");
+        // Executa o Roll normalmente
+        const damageRoll = await this.damageRoll(config);
+        const isCritical = damageRoll.isCritical ;
+        // Calcula bônus de máximo do dado apenas se crítico
+        if (isCritical) {
+          let maxBonus = 0;
+          for (let term of damageRoll.terms) {
+            if (term instanceof Die && term.options.critical) {
+              maxBonus += term.faces * term.number;
+            }
+          }
+      
+          const newTotal = damageRoll.total + maxBonus;
+      
+          // Substitui a mensagem original por sua própria
+          damageRoll._total = newTotal;
+          return damageRoll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: `💥 Dano Crítico Ajustado: Rolagem + Máximo = ${damageRoll.total} + ${maxBonus} = ${newTotal}`
+          });
+        }
+      
+        // Se não for crítico, mostra normalmente
+        return damageRoll.toMessage({
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+          flavor: "Dano normal"
+        });
+      }, "OVERRIDE");
+      
   });
   
+
