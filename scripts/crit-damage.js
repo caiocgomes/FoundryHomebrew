@@ -31,7 +31,7 @@ Hooks.once("ready", () => {
   
       // Valor total final: rolagem + máximo dos dados
       const newTotal = damageRoll.total + maxDiceTotal;
-  
+      console.log("Dano total: ",newTotal)
       // Atualiza o flavor e mostra o novo valor no chat
       damageRoll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),

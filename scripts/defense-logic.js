@@ -22,23 +22,29 @@ Hooks.once("ready", () => {
     const target = targets[0];
     const targetActor = target.actor;
 
+
+    // Cria a mensagem com botão e armazena ID
     const message = await ChatMessage.create({
       user: game.user.id,
       speaker: ChatMessage.getSpeaker({ actor: targetActor }),
-      content: `<button class="defense-roll">Rolar Defesa</button>`,
+      content: `<button class="defense-roll" data-message-id="{{messageId}}">🎯 Rolar Defesa</button>`,
     });
 
-    Hooks.once("renderChatMessage", (msg, html, data) => {
+    // Usa on() para não perder o evento
+    Hooks.on("renderChatMessage", (msg, html, data) => {
+      // Garante que só ativa no botão específico
+      if (msg.id !== message.id) return;
+
       html.find(".defense-roll").click(async () => {
         const defenseBonus = targetActor.system.attributes.ac.value - 10;
         const formula = `1d20 + ${defenseBonus}`;
         const defenseRoll = await new Roll(formula).roll({ async: true });
         defenseRoll.toMessage({
           speaker: ChatMessage.getSpeaker({ actor: targetActor }),
-          flavor: "Defesa Ativa",
+          flavor: "🛡️ Defesa Ativa",
         });
 
-        // Aqui você pode comparar os valores
+        // Comparação de rolagens (opcional)
         console.log(`Ataque: ${attackRoll.total} vs Defesa: ${defenseRoll.total}`);
       });
     });
