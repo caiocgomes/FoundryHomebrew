@@ -1,0 +1,17 @@
+{
+  "name": "new-combat-system",
+  "title": "Custom combat  system",
+  "description": "Replaces AC with Defense Bonus and adds active defense rolls.",
+  "version": "1.0.0",
+  "author": "Victor Caparica",
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "11",
+  "system": ["dnd5e"],
+  "languages": [
+    {
+      "lang": "en",
+      "path": "lang/en.json"
+    }
+  ],
+  "scripts": ["scripts/defense-logic.js"]
+}
