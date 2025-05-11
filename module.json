@@ -16,5 +16,5 @@
   "scripts": ["scripts/defense-logic.js"],
   "url": "https://github.com/seu-usuario/seu-repo",
   "manifest": "https://raw.githubusercontent.com/caiocgomes/FoundryHomebrew/refs/heads/main/module.json",
-  "download": "https://github.com/caiocgomes/FoundryHomebrew/archive/refs/heads/new-combat-system.zip"
+  "download": "https://github.com/caiocgomes/FoundryHomebrew/archive/refs/heads/main.zip"
 }
