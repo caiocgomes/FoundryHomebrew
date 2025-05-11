@@ -12,7 +12,8 @@ Hooks.once("ready", () => {
         
       // Chama a função original para obter o resultado base
       const damageRoll = await wrapped(...args);
-  
+      
+      console.log("config: ",config)
       // Só modifica se for dano crítico
       if (!config?.critical) {
         console.log("config: ",config)
