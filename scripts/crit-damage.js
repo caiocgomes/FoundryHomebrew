@@ -6,9 +6,11 @@ Hooks.once("ready", () => {
       return;
     }
   
-    libWrapper.register("crit-damage-enhancer", "CONFIG.Item.documentClass.prototype.rollDamage", async function (wrapped, ...args) {
+    libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollDamage", async function (wrapped, ...args) {
+      
+      console.log("Interceptando jogada critica (dano)",this)
       const [config = {}, options = {}] = args;
-  
+        
       // Chama a função original para obter o resultado base
       const damageRoll = await wrapped(...args);
   
