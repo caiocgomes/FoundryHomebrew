@@ -10,9 +10,14 @@ Hooks.once("ready", () => {
     console.log("Interceptando ataque", this)
     const attackRoll = await new Roll("1d20 + @attributes.prof").roll({async: true});
     const attacker = this;
-    const targets = Array.from(game.user?.targets ?? []);
-    if (targets.length === 0) return wrapped(...args);
-    const target = targets[0].actor;
+    const targets = Array.from(game.user.targets);
+    if (targets.length === 0) {
+      ui.notifications.warn("Nenhum alvo selecionado para o ataque!");
+      return attackRoll;
+    }
+
+    const target = targets[0]; // Pega o primeiro token alvo
+    const targetActor = target.actor;
 
     const content = `
       <strong>${attacker.name}</strong> attacks <strong>${target.name}</strong>:<br>
