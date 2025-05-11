@@ -19,16 +19,24 @@ Hooks.once("ready", () => {
     const target = targets[0]; // Pega o primeiro token alvo
     const targetActor = target.actor;
 
-    const content = `
-      <strong>${attacker.name}</strong> attacks <strong>${target.name}</strong>:<br>
-      Attack Roll: <strong>${attackRoll.total}</strong><br>
-      <button data-attacker="${attacker.id}" data-attack-roll="${attackRoll.total}" data-target="${target.id}" class="roll-defense-button">Roll Defense</button>
-    `;
+    // Escuta clique no botão
+    Hooks.once("renderChatMessage", (msg, html, data) => {
+      html.find(".defense-roll").click(async () => {
+        const defenseBonus = targetActor.system.attributes.ac.value - 10;
+        const defenseRoll = await new Roll("1d20 + ${defenseBonus}", targetActor.getRollData()).roll({ async: true });
+        defenseRoll.toMessage({
+          speaker: ChatMessage.getSpeaker({ actor: targetActor }),
+          flavor: "Defesa Ativa",
+        });
 
-    ChatMessage.create({ content });
+        // Aqui você pode comparar defesaRoll.total com attackRoll.total
+        // e decidir se o ataque acerta ou não
+      });
+    });
 
-    return true;
+    return attackRoll;
   }, "WRAPPER");
+});
 
   // Listen for button click
   Hooks.on("renderChatMessage", (message, html, data) => {
