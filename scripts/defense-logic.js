@@ -6,7 +6,7 @@ Hooks.once("ready", () => {
     return;
   }
 
-  libWrapper.register("my-defense-module", "CONFIG.Actor.documentClass.prototype.rollWeaponAttack", async function (wrapped, ...args) {
+  libWrapper.register("new-combat-system", "CONFIG.Actor.documentClass.prototype.rollWeaponAttack", async function (wrapped, ...args) {
     const attackRoll = await new Roll("1d20 + @attributes.prof").roll({async: true});
     const attacker = this;
     const targets = Array.from(game.user?.targets ?? []);
