@@ -2,7 +2,7 @@
   "name": "new-combat-system",
   "title": "Custom Combat System",
   "description": "Replaces AC with Defense Bonus and adds active defense rolls.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Victor Caparica",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "11",
