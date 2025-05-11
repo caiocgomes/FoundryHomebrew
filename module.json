@@ -3,7 +3,7 @@
   "title": "Custom Combat System",
   "description": "New combat system for Dnd 5e on Garen",
   "version": "1.0.13",
-  "authors": "Victor Caparica, Caio Gomes, Leticia Mazzoncini ",
+  "author": "Victor Caparica, Caio Gomes, Leticia Mazzoncini ",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "s11",
   "system": ["dnd5e"],

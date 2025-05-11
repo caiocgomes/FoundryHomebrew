@@ -11,7 +11,7 @@ Hooks.once("ready", () => {
       
         // Garante que ainda é executado como dano crítico
         
-      
+        console.log("damageRoll: ",damageRoll)
         // Executa o Roll normalmente
         const damageRoll = await this.damageRoll(config);
         const isCritical = damageRoll.isCritical ;
