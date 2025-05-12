@@ -1,51 +1,52 @@
 Hooks.once("ready", () => {
-    console.log("Critical Damage Enhancer loaded");
-  
-    if (!game?.modules?.get("lib-wrapper")?.active) {
-      ui.notifications.warn("O módulo 'libWrapper' é necessário para o módulo de dano crítico.");
+    if (!game.modules.get("lib-wrapper")?.active) {
+      ui.notifications.warn("libWrapper é necessário.");
       return;
     }
   
-    libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollDamage", async function (_wrapped, config = {}, options = {}) {
-        // Detecta se é crítico pelo config
-        const isCritical = Boolean(config.critical);
-        if (!isCritical) {
-          // Não crítico: chama o fluxo normal, sem interferir
-          return this.rollDamage._wrapped(config, options);
-        }
+    libWrapper.register("new-combat-system", "CONFIG.Dice.DamageRoll.prototype.evaluate", function (wrapped, options) {
+      // Interceptamos aqui a rolagem de dano — com acesso à fórmula e ao crit
+      
+      if (this.options.critical && typeof this._formula === "string") {
+        const originalFormula = this._formula;
+        const newFormula = rewriteCriticalFormula(originalFormula);
+      
   
-        // === Fluxo de crítico personalizado ===
-        // 1) Monta a fórmula original de dano (ex: "2d6 + 3")
-        const parts = this.data.data.damage.parts.map(p => p[0]);
-        const formula = parts.join(" + ");
-        const rollData = this.actor.getRollData();
-  
-        // 2) Rola o dano normal
-        const damageRoll = await new Roll(formula, rollData).roll({ async: true });
-  
-        // 3) Calcula o máximo possível dos dados
-        const diceRegex = /(\d+)d(\d+)/g;
-        let match, maxDice = 0;
-        while ((match = diceRegex.exec(formula))) {
-          const [ , qtd, faces ] = match;
-          maxDice += Number(qtd) * Number(faces);
-        }
-  
-        // 4) Soma o máximo ao total da rolagem
-        const newTotal = damageRoll.total + maxDice;
-        damageRoll._total = newTotal;
-  
-        // 5) Envia a sua mensagem explicando o cálculo
-        damageRoll.toMessage({
-          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          flavor: `💥 Crítico: máximo dos dados (${maxDice}) + rolagem (${damageRoll.total - rollData.abilities?.prof || 0}) + bônus = ${newTotal}`
-        });
-  
-        // Fim do OVERRIDE: não chama o wrapped original
-        return damageRoll;
-      },
-      "OVERRIDE"
-    );
+        // Reescreve a fórmula crítica: 4d6 + 3 → (2d6 + 12) + 3
+        this._formula = rewriteCriticalFormula(this._formula);
+      
+      
+      
+        this.terms = Roll.parse(this._formula,this.options);
+      
+      
+      }
+      return wrapped.call(this, options);
+    }, "WRAPPER");
   });
   
-
+  
+  function rewriteCriticalFormula(formula) {
+    const diceRegex = /(\d+)d(\d+)/g;
+    let newFormula = formula;
+    let match;
+    const replacements = [];
+  
+    while ((match = diceRegex.exec(formula)) !== null) {
+      const [full, qtdStr, facesStr] = match;
+      const qtd = Number(qtdStr);
+      const faces = Number(facesStr);
+  
+      if (qtd % 2 !== 0) continue;
+      const halfQtd = qtd / 2;
+      const max = halfQtd * faces;
+      replacements.push({ full, replacement: `${halfQtd}d${faces} + ${max}` });
+    }
+  
+    for (const { full, replacement } of replacements) {
+      newFormula = newFormula.replace(full, replacement);
+    }
+  
+    return newFormula;
+  }
+  
