@@ -6,49 +6,61 @@ Hooks.once("ready", () => {
     return;
   }
 
+  // Hook global – só registra uma vez
+  Hooks.on("renderChatMessage", (message, html, data) => {
+    html.find(".defense-roll").on("click", async (event) => {
+      event.preventDefault();
+
+      const messageId = event.currentTarget.dataset.messageId;
+      console.log("Botão clicado!", messageId);
+
+      const chatMessage = game.messages.get(messageId);
+      if (!chatMessage) return;
+
+      const actor = ChatMessage.getSpeakerActor(chatMessage.speaker);
+      if (!actor) {
+        ui.notifications.warn("Ator não encontrado para esta rolagem de defesa.");
+        return;
+      }
+
+      const defenseBonus = actor.system.attributes.ac.value - 10;
+      const formula = `1d20 + ${defenseBonus}`;
+      const defenseRoll = await new Roll(formula).roll({ async: true });
+      await defenseRoll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor }),
+        flavor: `🛡️ Defesa Ativa de <strong>${actor.name}</strong>`,
+      });
+
+      console.log(`Rolando defesa para ${actor.name}`);
+    });
+  });
+
+  // Wrapper do ataque
   libWrapper.register("new-combat-system", "CONFIG.Item.documentClass.prototype.rollAttack", async function (wrapped, ...args) {
     console.log("Interceptando ataque", this);
 
-    // Sempre execute a rolagem original primeiro
     const attackRoll = await wrapped(...args);
 
-    const attacker = this;
     const targets = Array.from(game.user.targets);
     if (targets.length === 0) {
       ui.notifications.warn("Nenhum alvo selecionado para o ataque!");
-      return attackRoll;  // Está tudo certo, pois o wrapped foi chamado
+      return attackRoll;
     }
 
-    const target = targets[0];
-    const targetActor = target.actor;
-
-
-    // Cria a mensagem com botão e armazena ID
-    const message = await ChatMessage.create({
-      user: game.user.id,
-      speaker: ChatMessage.getSpeaker({ actor: targetActor }),
-      content: `<button class="defense-roll" data-message-id="{{messageId}}">🎯 Rolar Defesa</button>`,
-    });
-
-    // Usa on() para não perder o evento
-    Hooks.on("renderChatMessage", (msg, html, data) => {
-      // Garante que só ativa no botão específico
-      if (msg.id !== message.id) return;
-
-      html.find(".defense-roll").click(async () => {
-        const defenseBonus = targetActor.system.attributes.ac.value - 10;
-        const formula = `1d20 + ${defenseBonus}`;
-        const defenseRoll = await new Roll(formula).roll({ async: true });
-        defenseRoll.toMessage({
-          speaker: ChatMessage.getSpeaker({ actor: targetActor }),
-          flavor: "🛡️ Defesa Ativa",
-        });
-
-        // Comparação de rolagens (opcional)
-        console.log(`Ataque: ${attackRoll.total} vs Defesa: ${defenseRoll.total}`);
+    for (const target of targets) {
+      const targetActor = target.actor;
+    
+      const message = await ChatMessage.create({
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor: targetActor }),
+        content: `<button class="defense-roll" data-message-id="PLACEHOLDER">🎯 Rolar Defesa</button>`,
       });
-    });
-
+    
+      const updatedContent = message.content.replace("PLACEHOLDER", message.id);
+      await message.update({ content: updatedContent });
+    }
+    
     return attackRoll;
+
   }, "WRAPPER");
 });
