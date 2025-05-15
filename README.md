@@ -26,9 +26,9 @@ Cada jogador tem quatro pontos de ação por rodada, que são renovados sempre q
 
 
 - Ataque* (1 ponto, Uma vez por turno): Realiza o número de ataques permitido por ação pela sua classe e nível. Cada ataque realizado pode ser normal ou ter uma das seguintes formas opcionais.
-a. Ataque Ofensivo: Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência +1 como bônus no dano.
-b. Ataque Defensivo. Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência como bônus na sua Defesa contra o próximo ataque sofrido.
-c. Ataque Preciso: Aplica sua Proficiência como bônus na rolagem de ataque e sua Proficiência +1 como redutor no dano.
+A. Ataque Ofensivo: Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência +1 como bônus no dano.
+B. Ataque Defensivo. Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência como bônus na sua Defesa contra o próximo ataque sofrido.
+C. Ataque Preciso: Aplica sua Proficiência como bônus na rolagem de ataque e sua Proficiência +1 como redutor no dano.
 
 - Ataque Total (3 pontos): Abre mão de toda a cautela para atacar com tudo que tem. Pode ser feito de duas formas.
 -- Determinado: Aplica sua Proficiência como bônus na rolagem de ataque.
