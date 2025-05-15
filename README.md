@@ -26,42 +26,42 @@ Cada jogador tem quatro pontos de ação por rodada, que são renovados sempre q
 
 
 - Ataque* (1 ponto, Uma vez por turno): Realiza o número de ataques permitido por ação pela sua classe e nível. Cada ataque realizado pode ser normal ou ter uma das seguintes formas opcionais.
-A. Ataque Ofensivo: Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência +1 como bônus no dano.
-B. Ataque Defensivo. Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência como bônus na sua Defesa contra o próximo ataque sofrido.
-C. Ataque Preciso: Aplica sua Proficiência como bônus na rolagem de ataque e sua Proficiência +1 como redutor no dano.
+1. Ataque Ofensivo: Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência +1 como bônus no dano.
+2. Ataque Defensivo. Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência como bônus na sua Defesa contra o próximo ataque sofrido.
+3. Ataque Preciso: Aplica sua Proficiência como bônus na rolagem de ataque e sua Proficiência +1 como redutor no dano.
 
 - Ataque Total (3 pontos): Abre mão de toda a cautela para atacar com tudo que tem. Pode ser feito de duas formas.
--- Determinado: Aplica sua Proficiência como bônus na rolagem de ataque.
--- Violento: Aplica sua Proficiência como bônus na rolagem de dano.
--- Se um Ataque Total Violento com arma mão-leve reduzir a 0 PV seu alvo, e houver caminho livre entre o alvo morto e um segundo alvo adjacente e no alcance, o segundo alvo faz uma rolagem de defesa imediata contra a mesma rolagem de ataque.
+  - Determinado: Aplica sua Proficiência como bônus na rolagem de ataque.
+  - Violento: Aplica sua Proficiência como bônus na rolagem de dano.
+  - Se um Ataque Total Violento com arma mão-leve reduzir a 0 PV seu alvo, e houver caminho livre entre o alvo morto e um segundo alvo adjacente e no alcance, o segundo alvo faz uma rolagem de defesa imediata contra a mesma rolagem de ataque.
 
-Defesa (varia): Realiza imediatamente uma rolagem de defesa após uma rolagem de ataque ser feita contra você. Pode ser normal (você precisa ter pelo menos 1 ponto de ação, mas ele não é gasto) ou ter uma das seguintes formas opcionais.
-a. Ceder Terreno (1 ponto, não é gasto). Quando fizer sentido com o contexto de ataque, o defensor pode se mover um quadrado para trás (afastando-se do atacante) para ganhar +1 nessa rolagem de defesa.
-b. Esquiva Acrobática (2 pontos). Quando fizer sentido com o contexto de ataque, o personagem sem armadura ou escudo pode se mover um quadrado para trás, afastando-se do atacante, para somar seus pontos de Acrobacia nessa rolagem de defesa.
-c. Defesa Total (3 pontos). O personagem em defesa total pode se defender de tantos ataques quanto receba e soma sua Proficiência como bônus em todas as rolagens de defesa até seu próximo turno.
+- Defesa (varia): Realiza imediatamente uma rolagem de defesa após uma rolagem de ataque ser feita contra você. Pode ser normal (você precisa ter pelo menos 1 ponto de ação, mas ele não é gasto) ou ter uma das seguintes formas opcionais.
+  - Ceder Terreno (1 ponto, não é gasto). Quando fizer sentido com o contexto de ataque, o defensor pode se mover um quadrado para trás (afastando-se do atacante) para ganhar +1 nessa rolagem de defesa.
+  - Esquiva Acrobática (2 pontos). Quando fizer sentido com o contexto de ataque, o personagem sem armadura ou escudo pode se mover um quadrado para trás, afastando-se do atacante, para somar seus pontos de Acrobacia nessa rolagem de defesa.
+  - Defesa Total (3 pontos). O personagem em defesa total pode se defender de tantos ataques quanto receba e soma sua Proficiência como bônus em todas as rolagens de defesa até seu próximo turno.
 
-Conjurar magia* (1 ponto; Uma vez por turno). Pode ser feito normalmente ou com uma das seguintes formas:
-a. Conjuração Ofensiva. aplica sua Proficiência como bônus na sua próxima rolagem de ataque mágico ou na dificuldade para resistir à magia, e como redutor na sua próxima rolagem de defesa ou de resistência.
-b. Conjuração Defensiva. Aplica sua Proficiência como redutor na rolagem de ataque mágico ou na dificuldade para resistir à magia. Aplica sua Proficiência como bônus na sua próxima rolagem de defesa ou jogada de resistência.
+- Conjurar magia* (1 ponto; Uma vez por turno). Pode ser feito normalmente ou com uma das seguintes formas:
+  - Conjuração Ofensiva. aplica sua Proficiência como bônus na sua próxima rolagem de ataque mágico ou na dificuldade para resistir à magia, e como redutor na sua próxima rolagem de defesa ou de resistência.
+  - Conjuração Defensiva. Aplica sua Proficiência como redutor na rolagem de ataque mágico ou na dificuldade para resistir à magia. Aplica sua Proficiência como bônus na sua próxima rolagem de defesa ou jogada de resistência.
 
-Movimento (varia). Desloca o personagem pelo cenário do combate. Pode ser feito de diferentes formas:
-a. Mudar Postura (1 ponto): De deitado para ajoelhado/agachado, de ajoelhado/agachado para em pé e vice-versa.
-b. Movimento Rápido (1 ponto). Anda metade do deslocamento padrão de combate do personagem.
-c. Movimento (2 pontos): Anda o deslocamento padrão de combate do personagem.
-d. Disparar (3 pontos): Anda 2x o deslocamento padrão de combate do personagem.
+- Movimento (varia). Desloca o personagem pelo cenário do combate. Pode ser feito de diferentes formas:
+  - Mudar Postura (1 ponto): De deitado para ajoelhado/agachado, de ajoelhado/agachado para em pé e vice-versa.
+  - Movimento Rápido (1 ponto). Anda metade do deslocamento padrão de combate do personagem.
+  - Movimento (2 pontos): Anda o deslocamento padrão de combate do personagem.
+  - Disparar (3 pontos): Anda 2x o deslocamento padrão de combate do personagem.
 
-Apoio* (1 ponto): Ajuda um aliado que esteja em um quadrado adjacente, dando Vantagem em sua próxima rolagem de ataque ou de defesa.
+- Apoio* (1 ponto): Ajuda um aliado que esteja em um quadrado adjacente, dando Vantagem em sua próxima rolagem de ataque ou de defesa.
 
-Finta* (1 ponto). Realiza uma rolagem de ataque normal contra uma rolagem de Sentir Motivação do alvo. Em caso de sucesso, não há dano, mas a Proficiência de quem fez a finta é aplicada como redutor na próxima rolagem de defesa do alvo.
+- Finta* (1 ponto). Realiza uma rolagem de ataque normal contra uma rolagem de Sentir Motivação do alvo. Em caso de sucesso, não há dano, mas a Proficiência de quem fez a finta é aplicada como redutor na próxima rolagem de defesa do alvo.
 
 - Mirar/Avaliar (1 ponto). Gasta um segundo observando cuidadosamente seu alvo antes de atacar. Se sua próxima ação for um ataque contra aquele alvo, soma +2 na rolagem.
 
-Habilidades de Classe* (1 ponto). Qualquer habilidade de classe que use originalmente uma action, bonus action ou reaction.
+- Habilidades de Classe* (1 ponto). Qualquer habilidade de classe que use originalmente uma action, bonus action ou reaction.
 
-Usar perícia* (Varia). Fazer uso físico ou mental de uma perícia. Pode tomar 1, 2 ou 3 pontos dependendo da complexidade da ação.
+- Usar perícia* (Varia). Fazer uso físico ou mental de uma perícia. Pode tomar 1, 2 ou 3 pontos dependendo da complexidade da ação.
 
 
-Ataques de Oportunidade
+## Ataques de Oportunidade
 
 Não existem mais ataques de oportunidade por deslocamento. Para fazer ataques de oportunidade é preciso ter ao menos 1 ponto de ação, mas ele não é gasto. O número de ataques de oportunidade que um personagem pode fazer por rodada é igual a 1 + seu modificador de Destreza, mínimo de 1. As seguintes ações geram ataque de oportunidade se feitas na área de ameaça de um inimigo:
 
