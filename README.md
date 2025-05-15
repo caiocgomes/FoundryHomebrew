@@ -30,9 +30,9 @@ Cada jogador tem quatro pontos de ação por rodada, que são renovados sempre q
   2. Ataque Defensivo. Aplica sua Proficiência como redutor na rolagem de ataque e sua Proficiência como bônus na sua Defesa contra o próximo ataque sofrido.
   3. Ataque Preciso: Aplica sua Proficiência como bônus na rolagem de ataque e sua Proficiência +1 como redutor no dano.
   4. Ataque Total (3 pontos): Abre mão de toda a cautela para atacar com tudo que tem. Pode ser feito de duas formas.
-    - Determinado: Aplica sua Proficiência como bônus na rolagem de ataque.
-    - Violento: Aplica sua Proficiência como bônus na rolagem de dano.
-    - Se um Ataque Total Violento com arma mão-leve reduzir a 0 PV seu alvo, e houver caminho livre entre o alvo morto e um segundo alvo adjacente e no alcance, o segundo alvo faz uma rolagem de defesa imediata contra a mesma rolagem de ataque.
+      - Determinado: Aplica sua Proficiência como bônus na rolagem de ataque.
+      - Violento: Aplica sua Proficiência como bônus na rolagem de dano.
+      - Se um Ataque Total Violento com arma mão-leve reduzir a 0 PV seu alvo, e houver caminho livre entre o alvo morto e um segundo alvo adjacente e no alcance, o segundo alvo faz uma rolagem de defesa imediata contra a mesma rolagem de ataque.
 
 - Defesa (varia): Realiza imediatamente uma rolagem de defesa após uma rolagem de ataque ser feita contra você. Pode ser normal (você precisa ter pelo menos 1 ponto de ação, mas ele não é gasto) ou ter uma das seguintes formas opcionais.
   - Ceder Terreno (1 ponto, não é gasto). Quando fizer sentido com o contexto de ataque, o defensor pode se mover um quadrado para trás (afastando-se do atacante) para ganhar +1 nessa rolagem de defesa.
